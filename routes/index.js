@@ -27,6 +27,17 @@ router.get('/parcels', function(req, res, next) {
   })
 });
 
+router.get('/parcel/:id', function(req, res, next) {
+  console.log(req.params.id)
+  let newUser = prisma.parcel.findUnique({
+    where: {
+      id: parseInt(req.params.id),
+    },
+  }).then( r => {
+    res.send(r);
+  })
+});
+
 router.delete('/del_parcel/:id', function(req, res, next) {
   console.log(req.params.id)
   let newUser = prisma.parcel.delete({
